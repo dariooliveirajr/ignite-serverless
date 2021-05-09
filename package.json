@@ -4,12 +4,14 @@
   "description": "Serverless aws-nodejs-typescript template",
   "scripts": {
     "dev": "serverless offline",
-    "dynamo:start": "sls dynamo start"
+    "dynamo:start": "sls dynamo start",
+    "deploy": "sls deploy -v"
   },
   "dependencies": {
     "@middy/core": "^1.5.0",
     "@middy/http-json-body-parser": "^1.5.0",
     "chrome-aws-lambda": "^9.1.0",
+    "copy-webpack-plugin": "^8.1.1",
     "dayjs": "^1.10.4",
     "handlebars": "^4.7.7",
     "puppeteer-core": "^9.1.1",
