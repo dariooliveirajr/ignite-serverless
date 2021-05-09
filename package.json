@@ -4,7 +4,7 @@
   "description": "Serverless aws-nodejs-typescript template",
   "scripts": {
     "dev": "serverless offline",
-    "deploy": "sls deploy -v"
+    "dynamo:start": "sls dynamo start"
   },
   "dependencies": {
     "@middy/core": "^1.5.0",
