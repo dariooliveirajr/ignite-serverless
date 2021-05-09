@@ -1,4 +1,4 @@
-import chromium from "chrome-aws-lambda";
+import chromium, { defaultViewport } from "chrome-aws-lambda";
 import path from "path";
 import fs from "fs";
 import handlebars from "handlebars";
@@ -54,6 +54,27 @@ export const handle = async (event) => {
     }
 
     const content = await compile(data);
+
+    const browser = await chromium.puppeteer.lauch({
+        headless: true,
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath
+    });
+
+    const page = await browser.newPage();
+
+    await page.setContent(content);
+
+    const pdf = await page.pdf({
+        format: "a4",
+        landscape: true,
+        path: process.env.IS_OFFLINE ? "certificate.pdf" : null,
+        printBackground: true,
+        preferCSSPageSize: true,
+    });
+
+    await browser.close();
 
     return {
         statusCode: 201,
